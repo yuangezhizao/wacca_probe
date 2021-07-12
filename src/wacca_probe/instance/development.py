@@ -7,5 +7,5 @@
     :Copyright: © 2021 yuangezhizao <root@yuangezhizao.cn>
 """
 SQLALCHEMY_BINDS = {
-    'maimai': 'mysql+pymysql://<rm>:<rm>@10.0.2.11/maimai',
+    'wacca': 'mysql+pymysql://<rm>:<rm>@10.0.2.11/wacca',
 }
