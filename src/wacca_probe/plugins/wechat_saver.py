@@ -6,6 +6,12 @@
     :Site: https://www.yuangezhizao.cn
     :Copyright: © 2021 yuangezhizao <root@yuangezhizao.cn>
 """
+import datetime
+
+import requests
+
+from wacca_probe.models.wacca import Record
+
 token = ''
 headers = {
     'Host': 'iot.universal-space.cn',
@@ -369,152 +375,6 @@ userMusicRate_url = 'https://iot.universal-space.cn//api/marv/wacca/userMusicRat
     }
 }
 '''
-recordList_url = 'https://iot.universal-space.cn//api/mns/mnsGame/recordList?productId=3160&pageNo=1&pageSize=5&orderBy=gameDate'
-'''
-{
-    "code": 1,
-    "message": "success",
-    "detail": "success",
-    "retCode": 0,
-    "retMsg": "success",
-    "pageNo": 1,
-    "pageSize": 5,
-    "totalPage": 1,
-    "totalSize": 5,
-    "data": [
-        {
-            "scoreId": 1481655,
-            "statisPage": "/pages/wacca/wacca-statis",
-            "modeName": "单人模式",
-            "comboCount": 141,
-            "productId": 3160,
-            "musicRate": "S",
-            "gameDate": "2021-07-09 17:53:28",
-            "recordPage": "/pages/wacca/wacca-detail",
-            "storeId": 4531,
-            "greatCount": 61,
-            "productName": "华卡音舞",
-            "machineName": "华卡音舞",
-            "musicName": "MEMORiZE",
-            "score": 938818,
-            "marvelousCount": 541,
-            "machineId": 8340,
-            "musicId": 20,
-            "goodCount": 8,
-            "musicGradeName": "Expert",
-            "storeName": "东方英雄（中央大道店）",
-            "artistName": "REDALiCE feat. Ayumi Nomiya",
-            "musicGrade": 3,
-            "musicImage": "https://yyb-oss.universal-space.cn/imgs/wacca/jacket/uT_J_S00_020.png",
-            "missCount": 16
-        },
-        {
-            "scoreId": 1481625,
-            "statisPage": "/pages/wacca/wacca-statis",
-            "modeName": "单人模式",
-            "comboCount": 262,
-            "productId": 3160,
-            "musicRate": "SSS",
-            "gameDate": "2021-07-09 17:50:25",
-            "recordPage": "/pages/wacca/wacca-detail",
-            "storeId": 4531,
-            "greatCount": 13,
-            "productName": "华卡音舞",
-            "machineName": "华卡音舞",
-            "musicName": "Gate One",
-            "score": 982446,
-            "marvelousCount": 489,
-            "machineId": 8340,
-            "musicId": 1058,
-            "goodCount": 0,
-            "musicGradeName": "Hard",
-            "storeName": "东方英雄（中央大道店）",
-            "artistName": "aran",
-            "musicGrade": 2,
-            "musicImage": "https://yyb-oss.universal-space.cn/imgs/wacca/jacket/uT_J_S01_058.png",
-            "missCount": 5
-        },
-        {
-            "scoreId": 1481586,
-            "statisPage": "/pages/wacca/wacca-statis",
-            "modeName": "单人模式",
-            "comboCount": 499,
-            "productId": 3160,
-            "musicRate": "SSS",
-            "gameDate": "2021-07-09 17:47:07",
-            "recordPage": "/pages/wacca/wacca-detail",
-            "storeId": 4531,
-            "greatCount": 11,
-            "productName": "华卡音舞",
-            "machineName": "华卡音舞",
-            "musicName": "Poseidon",
-            "score": 992385,
-            "marvelousCount": 487,
-            "machineId": 8340,
-            "musicId": 5,
-            "goodCount": 1,
-            "musicGradeName": "Hard",
-            "storeName": "东方英雄（中央大道店）",
-            "artistName": "Massive New Krew",
-            "musicGrade": 2,
-            "musicImage": "https://yyb-oss.universal-space.cn/imgs/wacca/jacket/uT_J_S00_005.png",
-            "missCount": 0
-        },
-        {
-            "scoreId": 1481537,
-            "statisPage": "/pages/wacca/wacca-statis",
-            "modeName": "单人模式",
-            "comboCount": 228,
-            "productId": 3160,
-            "musicRate": "SS",
-            "gameDate": "2021-07-09 17:43:15",
-            "recordPage": "/pages/wacca/wacca-detail",
-            "storeId": 4531,
-            "greatCount": 24,
-            "productName": "华卡音舞",
-            "machineName": "华卡音舞",
-            "musicName": "Knight Rider",
-            "score": 976411,
-            "marvelousCount": 467,
-            "machineId": 8340,
-            "musicId": 4,
-            "goodCount": 1,
-            "musicGradeName": "Hard",
-            "storeName": "东方英雄（中央大道店）",
-            "artistName": "USAO",
-            "musicGrade": 2,
-            "musicImage": "https://yyb-oss.universal-space.cn/imgs/wacca/jacket/uT_J_S00_004.png",
-            "missCount": 4
-        },
-        {
-            "scoreId": 1481490,
-            "statisPage": "/pages/wacca/wacca-statis",
-            "modeName": "单人模式",
-            "comboCount": 198,
-            "productId": 3160,
-            "musicRate": "SS",
-            "gameDate": "2021-07-09 17:40:11",
-            "recordPage": "/pages/wacca/wacca-detail",
-            "storeId": 4531,
-            "greatCount": 17,
-            "productName": "华卡音舞",
-            "machineName": "华卡音舞",
-            "musicName": "JINGLE DEATH",
-            "score": 978072,
-            "marvelousCount": 392,
-            "machineId": 8340,
-            "musicId": 1123,
-            "goodCount": 4,
-            "musicGradeName": "Hard",
-            "storeName": "东方英雄（中央大道店）",
-            "artistName": "DJ Myosuke & Gram",
-            "musicGrade": 2,
-            "musicImage": "https://yyb-oss.universal-space.cn/imgs/wacca/jacket/uT_J_S01_123.png",
-            "missCount": 2
-        }
-    ]
-}
-'''
 recordDetail_url = 'https://iot.universal-space.cn//api/mns/mnsGame/recordDetail?machineId=8340&scoreId=1481655'
 '''
 {
@@ -559,3 +419,46 @@ recordDetail_url = 'https://iot.universal-space.cn//api/mns/mnsGame/recordDetail
     }
 }
 '''
+
+
+def save_record_list():
+    session = requests.Session()
+    page = 1
+    while True:
+        url = f'https://iot.universal-space.cn//api/mns/mnsGame/recordList?productId=3160&pageNo={page}&pageSize=5&orderBy=gameDate'
+        r = session.get(url, headers=headers, verify=False)
+        r_json = r.json()
+        if r_json['retCode'] == 0:
+            data = r_json['data']
+            for each in data:
+                scoreId = each['scoreId']
+                modeName = each['modeName']
+                comboCount = each['comboCount']
+                # productId = each['productId']
+                musicRate = each['musicRate']
+                gameDate = each['gameDate']
+                storeId = each['storeId']
+                greatCount = each['greatCount']
+                # productName = each['productName']
+                # machineName = each['machineName']
+                musicName = each['musicName']
+                score = each['score']
+                marvelousCount = each['marvelousCount']
+                machineId = each['machineId']
+                musicId = each['musicId']
+                goodCount = each['goodCount']
+                musicGradeName = each['musicGradeName']
+                storeName = each['storeName']
+                artistName = each['artistName']
+                musicGrade = each['musicGrade']
+                musicImage = each['musicImage']
+                missCount = each['missCount']
+                cache_dt = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
+                if not Record.query.filter(Record.scoreId == scoreId).first():
+                    new_wacca_Record = Record(scoreId, modeName, comboCount, musicRate, gameDate, storeId, greatCount,
+                                              musicName, score, marvelousCount, machineId, musicId, goodCount,
+                                              musicGradeName, storeName, artistName, musicGrade, musicImage, missCount,
+                                              cache_dt)
+                    new_wacca_Record.save()
+        page += 1
+        # TODO：out of cycle
