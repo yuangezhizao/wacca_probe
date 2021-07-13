@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="keywords" content="wacca 查分器,华卡,华卡音舞,yuangezhizao"/>
+    <meta name="description" content="这里是个人在用的 wacca 查分器">
+    <meta name="author" content="yuangezhizao"/>
+    <meta name="Copyright" content="Copyright yuangezhizao All Rights Reserved."/>
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui/dist/semantic.min.css">
+    <link rel="dns-prefetch" href="//wacca.yuangezhizao.cn">
+    <link rel="dns-prefetch" href="//lab.yuangezhizao.cn">
+    <link rel="dns-prefetch" href="//www.yuangezhizao.cn">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+    {% block head %}{% endblock %}
+</head>
+<body>
+{% block body %}
+    <div class="ui container">
+        <div class="ui blue pointing menu">
+            {% block nav %}
+                <a class="active item"><i class="home icon"></i>首页</a>
+                <a class="item" href="https://github.com/yuangezhizao/wacca_probe" target="_blank"><i
+                        class="archive icon"></i>源码</a>
+            {% endblock %}
+        </div>
+        {% block content %}{% endblock %}
+        <div class="ui divider"></div>
+        <footer>
+            <div class="ui info message" style="text-align: center;">
+                yuangezhizao&nbsp&nbsp&nbsp&nbsp©&nbsp&nbsp&nbsp&nbsp2021<br>
+                Powered by Tencent Cloud Serverless
+            </div>
+        </footer>
+    </div>
+{% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fomantic-ui/dist/semantic.min.js"></script>
+<script>
+    $('.message .close').on('click', function () {
+        $(this).closest('.message').transition('fade');
+    });
+    $('.selection.dropdown')
+        .dropdown()
+    ;
+</script>
+{% block script %}{% endblock %}
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E170V9QX4M"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-E170V9QX4M');
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?fa663a4c914007f9c4664ea57bbd8698";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+</body>
+</html>
