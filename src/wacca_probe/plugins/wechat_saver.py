@@ -425,40 +425,40 @@ def save_record_list():
     session = requests.Session()
     page = 1
     while True:
-        url = f'https://iot.universal-space.cn//api/mns/mnsGame/recordList?productId=3160&pageNo={page}&pageSize=5&orderBy=gameDate'
+        url = f'https://iot.universal-space.cn//api/mns/mnsGame/recordList?productId=3160&pageNo={page}&pageSize=500&orderBy=gameDate'
         r = session.get(url, headers=headers, verify=False)
         r_json = r.json()
-        if r_json['retCode'] == 0:
-            data = r_json['data']
-            for each in data:
-                scoreId = each['scoreId']
-                modeName = each['modeName']
-                comboCount = each['comboCount']
-                # productId = each['productId']
-                musicRate = each['musicRate']
-                gameDate = each['gameDate']
-                storeId = each['storeId']
-                greatCount = each['greatCount']
-                # productName = each['productName']
-                # machineName = each['machineName']
-                musicName = each['musicName']
-                score = each['score']
-                marvelousCount = each['marvelousCount']
-                machineId = each['machineId']
-                musicId = each['musicId']
-                goodCount = each['goodCount']
-                musicGradeName = each['musicGradeName']
-                storeName = each['storeName']
-                artistName = each['artistName']
-                musicGrade = each['musicGrade']
-                musicImage = each['musicImage']
-                missCount = each['missCount']
-                cache_dt = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
-                if not Record.query.filter(Record.scoreId == scoreId).first():
-                    new_wacca_Record = Record(scoreId, modeName, comboCount, musicRate, gameDate, storeId, greatCount,
-                                              musicName, score, marvelousCount, machineId, musicId, goodCount,
-                                              musicGradeName, storeName, artistName, musicGrade, musicImage, missCount,
-                                              cache_dt)
-                    new_wacca_Record.save()
+        if r_json['totalSize'] == 0:
+            break
+        data = r_json['data']
+        for each in data:
+            scoreId = each['scoreId']
+            modeName = each['modeName']
+            comboCount = each['comboCount']
+            # productId = each['productId']
+            musicRate = each['musicRate']
+            gameDate = each['gameDate']
+            storeId = each['storeId']
+            greatCount = each['greatCount']
+            # productName = each['productName']
+            # machineName = each['machineName']
+            musicName = each['musicName']
+            score = each['score']
+            marvelousCount = each['marvelousCount']
+            machineId = each['machineId']
+            musicId = each['musicId']
+            goodCount = each['goodCount']
+            musicGradeName = each['musicGradeName']
+            storeName = each['storeName']
+            artistName = each['artistName']
+            musicGrade = each['musicGrade']
+            musicImage = each['musicImage']
+            missCount = each['missCount']
+            cache_dt = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
+            if not Record.query.filter(Record.scoreId == scoreId).first():
+                new_wacca_Record = Record(scoreId, modeName, comboCount, musicRate, gameDate, storeId, greatCount,
+                                          musicName, score, marvelousCount, machineId, musicId, goodCount,
+                                          musicGradeName, storeName, artistName, musicGrade, musicImage, missCount,
+                                          cache_dt)
+                new_wacca_Record.save()
         page += 1
-        # TODO：out of cycle
