@@ -40,10 +40,9 @@ class Record(db.Model):
 
     cache_dt = db.Column(db.DateTime, nullable=False)
 
-    def __init__(self, id, scoreId, modeName, comboCount, musicRate, gameDate, storeId, greatCount,
+    def __init__(self, scoreId, modeName, comboCount, musicRate, gameDate, storeId, greatCount,
                  musicName, score, marvelousCount, machineId, musicId, goodCount, musicGradeName, storeName, artistName,
                  musicGrade, musicImage, missCount, cache_dt):
-        self.id = id
         self.scoreId = scoreId
         self.modeName = modeName
         self.comboCount = comboCount
