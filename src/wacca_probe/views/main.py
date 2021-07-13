@@ -49,7 +49,7 @@ def test():
             musicGrade = data[i]['musicGrade']
             musicImage = data[i]['musicImage']
             missCount = data[i]['missCount']
-            cache_dt = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
+            cache_dt = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             if not Record.query.filter(Record.scoreId == scoreId).first():
                 new_wacca_Record = Record(scoreId, modeName, comboCount, musicRate, gameDate, storeId, greatCount,
                                           musicName, score, marvelousCount, machineId, musicId, goodCount,
