@@ -12,6 +12,11 @@ app = flask.current_app
 bp = flask.Blueprint('main', __name__)
 
 
+@bp.route('/')
+def site_index():
+    return flask.render_template('index.html')
+
+
 @bp.route('/test')
 def test():
     import json
