@@ -40,11 +40,10 @@ class Record(db.Model):
 
     cache_dt = db.Column(db.DateTime, nullable=False)
 
-    def __init__(self, id, level_img_s, scoreId, modeName, comboCount, musicRate, gameDate, storeId, greatCount,
+    def __init__(self, id, scoreId, modeName, comboCount, musicRate, gameDate, storeId, greatCount,
                  musicName, score, marvelousCount, machineId, musicId, goodCount, musicGradeName, storeName, artistName,
                  musicGrade, musicImage, missCount, cache_dt):
         self.id = id
-        self.level_img_s = level_img_s
         self.scoreId = scoreId
         self.modeName = modeName
         self.comboCount = comboCount
@@ -67,8 +66,8 @@ class Record(db.Model):
         self.cache_dt = cache_dt
 
     def __repr__(self):
-        return '<Record (%s, %s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)>' % (
-            self.id, self.level_img_s, self.scoreId, self.modeName, self.comboCount, self.musicRate, self.gameDate,
+        return '<Record (%s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)>' % (
+            self.id, self.scoreId, self.modeName, self.comboCount, self.musicRate, self.gameDate,
             self.storeId, self.greatCount, self.musicName, self.score, self.marvelousCount, self.machineId,
             self.musicId, self.goodCount, self.musicGradeName, self.storeName, self.artistName, self.musicGrade,
             self.musicImage, self.missCount, self.cache_dt)
@@ -76,7 +75,6 @@ class Record(db.Model):
     def to_json(self):
         record = {
             'id': self.id,
-            'level_img_s': self.level_img_s,
             'scoreId': self.scoreId,
             'modeName': self.modeName,
             'comboCount': self.comboCount,
