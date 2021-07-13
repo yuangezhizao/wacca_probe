@@ -425,40 +425,45 @@ def save_record_list():
     session = requests.Session()
     page = 1
     while True:
-        url = f'https://iot.universal-space.cn//api/mns/mnsGame/recordList?productId=3160&pageNo={page}&pageSize=500&orderBy=gameDate'
+        url = f'https://iot.universal-space.cn//api/mns/mnsGame/recordList?productId=3160&pageNo={page}&pageSize=50&orderBy=gameDate'
         r = session.get(url, headers=headers, verify=False)
         r_json = r.json()
         if r_json['totalSize'] == 0:
             break
         data = r_json['data']
-        for each in data:
-            scoreId = each['scoreId']
-            modeName = each['modeName']
-            comboCount = each['comboCount']
-            # productId = each['productId']
-            musicRate = each['musicRate']
-            gameDate = each['gameDate']
-            storeId = each['storeId']
-            greatCount = each['greatCount']
-            # productName = each['productName']
-            # machineName = each['machineName']
-            musicName = each['musicName']
-            score = each['score']
-            marvelousCount = each['marvelousCount']
-            machineId = each['machineId']
-            musicId = each['musicId']
-            goodCount = each['goodCount']
-            musicGradeName = each['musicGradeName']
-            storeName = each['storeName']
-            artistName = each['artistName']
-            musicGrade = each['musicGrade']
-            musicImage = each['musicImage']
-            missCount = each['missCount']
+        record_count = len(data)
+        for i in range(record_count - 1, -1, -1):
+            scoreId = data[i]['scoreId']
+            modeName = data[i]['modeName']
+            comboCount = data[i]['comboCount']
+            # productId = data[i]['productId']
+            musicRate = data[i]['musicRate']
+            gameDate = data[i]['gameDate']
+            storeId = data[i]['storeId']
+            greatCount = data[i]['greatCount']
+            # productName = data[i]['productName']
+            # machineName = data[i]['machineName']
+            musicName = data[i]['musicName']
+            score = data[i]['score']
+            marvelousCount = data[i]['marvelousCount']
+            machineId = data[i]['machineId']
+            musicId = data[i]['musicId']
+            goodCount = data[i]['goodCount']
+            musicGradeName = data[i]['musicGradeName']
+            storeName = data[i]['storeName']
+            artistName = data[i]['artistName']
+            musicGrade = data[i]['musicGrade']
+            musicImage = data[i]['musicImage']
+            missCount = data[i]['missCount']
             cache_dt = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
             if not Record.query.filter(Record.scoreId == scoreId).first():
                 new_wacca_Record = Record(scoreId, modeName, comboCount, musicRate, gameDate, storeId, greatCount,
                                           musicName, score, marvelousCount, machineId, musicId, goodCount,
                                           musicGradeName, storeName, artistName, musicGrade, musicImage, missCount,
                                           cache_dt)
-                new_wacca_Record.save()
-        page += 1
+                r = new_wacca_Record.save()
+                print(r)
+            else:
+                print(f'scoreId {scoreId} 已存在')
+        break  # 确保每次新增小于 50 次记录即可
+        # page += 1
