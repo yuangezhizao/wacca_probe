@@ -71,31 +71,8 @@ class Record(db.Model):
             self.musicId, self.goodCount, self.musicGradeName, self.storeName, self.artistName, self.musicGrade,
             self.musicImage, self.missCount, self.cache_dt)
 
-    def to_json(self):
-        record = {
-            'id': self.id,
-            'scoreId': self.scoreId,
-            'modeName': self.modeName,
-            'comboCount': self.comboCount,
-            'musicRate': self.musicRate,
-            'gameDate': self.gameDate,
-            'storeId': self.storeId,
-            'greatCount': self.greatCount,
-            'musicName': self.musicName,
-            'score': self.score,
-            'marvelousCount': self.marvelousCount,
-            'machineId': self.machineId,
-            'musicId': self.musicId,
-            'goodCount': self.goodCount,
-            'musicGradeName': self.musicGradeName,
-            'storeName': self.storeName,
-            'artistName': self.artistName,
-            'musicGrade': self.musicGrade,
-            'musicImage': self.musicImage,
-            'missCount': self.missCount,
-            'cache_dt': self.cache_dt
-        }
-        return record
+    def to_dict(self):
+        return {c.name: getattr(self, c.name, None) for c in self.__table__.columns}
 
     def save(self):
         db.session.add(self)
