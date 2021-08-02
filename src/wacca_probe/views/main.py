@@ -27,7 +27,7 @@ def test():
 
     with open('wacca_probe/static/static/json/recordList.json', encoding='utf-8') as f:
         record = f.read()
-        record_json = json.loads(record, strict=False)
+        record_json = json.loads(record)
         data = record_json['data']
         record_count = len(data)
         for i in range(record_count - 1, -1, -1):
