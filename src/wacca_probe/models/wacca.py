@@ -6,14 +6,13 @@
     :Site: https://www.yuangezhizao.cn
     :Copyright: © 2021 yuangezhizao <root@yuangezhizao.cn>
 """
+from wacca_probe.models.common import HasId, HasTime
 from wacca_probe.plugins.extensions import db
 
 
-class Record(db.Model):
+class Record(db.Model, HasId, HasTime):
     __bind_key__ = 'wacca'
     __tablename__ = 'record'
-
-    id = db.Column(db.Integer, primary_key=True)
 
     scoreId = db.Column(db.Integer)
     modeName = db.Column(db.VARCHAR(50))
@@ -38,11 +37,9 @@ class Record(db.Model):
     musicImage = db.Column(db.VARCHAR(255))
     missCount = db.Column(db.Integer)
 
-    cache_dt = db.Column(db.DateTime, nullable=False)
-
     def __init__(self, scoreId, modeName, comboCount, musicRate, gameDate, storeId, greatCount,
                  musicName, score, marvelousCount, machineId, musicId, goodCount, musicGradeName, storeName, artistName,
-                 musicGrade, musicImage, missCount, cache_dt):
+                 musicGrade, musicImage, missCount):
         self.scoreId = scoreId
         self.modeName = modeName
         self.comboCount = comboCount
@@ -62,14 +59,13 @@ class Record(db.Model):
         self.musicGrade = musicGrade
         self.musicImage = musicImage
         self.missCount = missCount
-        self.cache_dt = cache_dt
 
     def __repr__(self):
-        return '<Record (%s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)>' % (
+        return '<Record (%s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)>' % (
             self.id, self.scoreId, self.modeName, self.comboCount, self.musicRate, self.gameDate,
             self.storeId, self.greatCount, self.musicName, self.score, self.marvelousCount, self.machineId,
             self.musicId, self.goodCount, self.musicGradeName, self.storeName, self.artistName, self.musicGrade,
-            self.musicImage, self.missCount, self.cache_dt)
+            self.musicImage, self.missCount)
 
     def to_dict(self):
         return {c.name: getattr(self, c.name, None) for c in self.__table__.columns}
