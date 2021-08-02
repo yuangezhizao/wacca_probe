@@ -20,7 +20,6 @@ def site_index():
 @bp.route('/test')
 def test():
     import json
-    import datetime
     from wacca_probe.plugins.extensions import db
     from wacca_probe.models.wacca import Record
 
@@ -28,7 +27,7 @@ def test():
 
     with open('wacca_probe/static/static/json/recordList.json', encoding='utf-8') as f:
         record = f.read()
-        record_json = json.loads(record)
+        record_json = json.loads(record, strict=False)
         data = record_json['data']
         record_count = len(data)
         for i in range(record_count - 1, -1, -1):
@@ -54,12 +53,10 @@ def test():
             musicGrade = data[i]['musicGrade']
             musicImage = data[i]['musicImage']
             missCount = data[i]['missCount']
-            cache_dt = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             if not Record.query.filter(Record.scoreId == scoreId).first():
                 new_wacca_Record = Record(scoreId, modeName, comboCount, musicRate, gameDate, storeId, greatCount,
                                           musicName, score, marvelousCount, machineId, musicId, goodCount,
-                                          musicGradeName, storeName, artistName, musicGrade, musicImage, missCount,
-                                          cache_dt)
+                                          musicGradeName, storeName, artistName, musicGrade, musicImage, missCount)
                 r = new_wacca_Record.save()
                 print(r)
             else:
