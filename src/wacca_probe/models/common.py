@@ -6,7 +6,7 @@
     :Site: https://www.yuangezhizao.cn
     :Copyright: © 2021 yuangezhizao <root@yuangezhizao.cn>
 """
-from maimai_DX_CN_probe.plugins.extensions import db
+from wacca_probe.plugins.extensions import db
 
 
 class HasId(object):
