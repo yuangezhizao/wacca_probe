@@ -1,0 +1,174 @@
+{% extends "/base.html" %}
+
+{% from 'macros.html' import pagination_widget with context %}
+
+{% block title %}WACCA－快速预览－{% endblock %}
+
+{% block body %}
+    <div class="ui centered grid">
+        <div class="eleven wide computer column">
+            <div class="ui blue pointing menu">
+                <a class="active item"><i class="circle icon"></i>WACCA－快速预览－</a>
+                <a class="item" href="{{ url_for('main.site_index') }}"><i class="arrow left icon"></i>返回首页</a>
+            </div>
+
+            <div class="ui dividing blue header">
+                <div class="content">
+                    <h2>quick_record</h2>
+                </div>
+            </div>
+
+            <table id="table" class="ui compact sortable celled unstackable striped blue table">
+                <thead>
+                <tr class="positive">
+                    <th>id</th>
+                    <th>mode</th>
+                    <th>musicImage</th>
+                    <th class="two wide">musicName</th>
+                    <th class="two wide">artistName</th>
+                    <th>Grade</th>
+                    <th>score</th>
+                    <th>Rate</th>
+                    <th>CountTable</th>
+                    <th>combo</th>
+                    <th>storeName</th>
+                    <th>gameDate</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for data in record_data_paginate.items %}
+                    <tr>
+                        <td>
+                            {{ data.id }}
+                        </td>
+                        <td>
+                            {{ data.modeName }}
+                        </td>
+                        <td>
+                            <div class="ui small image">
+                                <img width="70%" src="{{ data.musicImage }}">
+                            </div>
+                        </td>
+                        <td>
+                            {{ data.musicName }}
+                        </td>
+                        <td>
+                            {{ data.artistName }}
+                        </td>
+                        <td class="{% if data.musicGrade == 1 %}blue{% elif data.musicGrade == 2 %}yellow{% elif data.musicGrade == 3 %}pink{% else %}{% endif %}">
+                            {{ data.musicGradeName }}
+                        </td>
+                        <td class="
+{% if data.score == 1000000 %}
+    black
+{% elif data.score >= 980000 %}
+    grey
+{% elif data.score >= 950000 %}
+    brown
+{% elif data.score >= 900000 %}
+    yellow
+{% elif data.score >= 850000 %}
+    orange
+{% elif data.score >= 800000 %}
+    red
+{% elif data.score >= 700000 %}
+    pink
+{% elif data.score >= 480000 %}
+    purple
+{% elif data.score >= 1 %}
+    violet
+{% elif data.score == 0 %}
+    blue
+{% else %}
+{% endif %}">
+                            {{ data.score }}
+                        </td>
+                        <td class="
+{% if data.score == 1000000 %}
+    black
+{% elif data.score >= 980000 %}
+    grey
+{% elif data.score >= 950000 %}
+    brown
+{% elif data.score >= 900000 %}
+    yellow
+{% elif data.score >= 850000 %}
+    orange
+{% elif data.score >= 800000 %}
+    red
+{% elif data.score >= 700000 %}
+    pink
+{% elif data.score >= 480000 %}
+    purple
+{% elif data.score >= 1 %}
+    violet
+{% elif data.score == 0 %}
+    blue
+{% else %}
+{% endif %}">
+                            {{ data.musicRate }}
+                        </td>
+                        <td class="{% if data.missCount == 0 %}brown{% else %}{% endif %}">
+                            <span style="color:deeppink;font-weight:bold;">marvelous</span>：
+                            {{ data.marvelousCount }}<br>
+
+                            <span style="color:green;font-weight:bold;">great</span>：
+                            <span style="{% if data.greatCount > 5 %}color:blue;
+                            {% elif data.greatCount > 0 %}color:red;font-weight:bold;
+                            {% else %}color:pink;
+                            {% endif %}">
+                                    {{ data.greatCount }}
+                            </span><br>
+
+                            <span style="color:blue;font-weight:bold;">good</span>：
+                            <span style="{% if data.goodCount > 5 %}color:blue;
+                            {% elif data.goodCount > 0 %}color:red;font-weight:bold;
+                            {% else %}color:pink;
+                            {% endif %}">
+                                    {{ data.goodCount }}
+                            </span><br>
+
+                            <span style="color:gray;font-weight:bold;">miss</span>：
+                            <span style="{% if data.missCount > 5 %}color:blue;
+                            {% elif data.missCount > 0 %}color:red;font-weight:bold;
+                            {% else %}color:pink;
+                            {% endif %}">
+                                    {{ data.missCount }}
+                            </span>
+                        </td>
+                        <td class="{% if data.missCount == 0 %}brown{% else %}{% endif %}">
+                            {{ data.comboCount }}
+                        </td>
+                        <td>
+                            {{ data.storeName }}
+                        </td>
+                        <td data-tooltip="{{ data.gameDate }}" data-inverted="">
+                            {{ data.gameDate | my_split(' ', 0) }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            {{ pagination_widget(record_data_paginate, 'main.record') }}
+
+            <div class="ui divider"></div>
+            <footer>
+                <div class="ui info message" style="text-align: center;">
+                    yuangezhizao&nbsp&nbsp&nbsp&nbsp©&nbsp&nbsp&nbsp&nbsp2021<br>
+                    Powered by Tencent Cloud Serverless
+                </div>
+            </footer>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/tablesorter/dist/js/jquery.tablesorter.min.js"></script>
+    <script>
+        $(document).ready(function () {
+                $("#table").tablesorter();
+            }
+        );
+    </script>
+{% endblock %}

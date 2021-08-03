@@ -8,6 +8,8 @@
 """
 import flask
 
+from wacca_probe.models.wacca import Record
+
 app = flask.current_app
 bp = flask.Blueprint('main', __name__)
 
@@ -15,6 +17,25 @@ bp = flask.Blueprint('main', __name__)
 @bp.route('/')
 def site_index():
     return flask.render_template('index.html')
+
+
+@bp.route('/record')
+def record():
+    page = int(flask.request.args.get('page', 1))
+    per_page = int(flask.request.args.get('per_page', 20))
+    if 'all' in flask.request.args:
+        per_page = 10000
+    if 'artistName' in flask.request.args:
+        _artistName = flask.request.args.get('artistName')
+        record_data_paginate = Record.query.filter_by(artistName=_artistName) \
+            .order_by(Record.id.desc()) \
+            .paginate(page, per_page)
+    else:
+        record_data_paginate = Record.query.order_by(Record.id.desc()).paginate(page, per_page)
+    # total = record_data_paginate.total
+    # total_page = math.ceil(total / per_page)
+    return flask.render_template('wacca/record/list.html', record_data_paginate=record_data_paginate,
+                                 page=page, per_page=per_page)
 
 
 @bp.route('/test')

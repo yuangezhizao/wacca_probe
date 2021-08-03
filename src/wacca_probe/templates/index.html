@@ -8,4 +8,13 @@
         <p>这里是个人在用的 WACCA 查分器
         </p>
     </div>
+    <h4 class="ui top attached block purple header">
+        record
+    </h4>
+    <div class="ui attached purple segment">
+        <a href="{{ url_for('main.record') }}">记录（分页）</a>
+    </div>
+    <div class="ui bottom attached segment">
+        <a href="{{ url_for('main.record') + '?all' }}">记录（全部）</a>
+    </div>
 {% endblock %}
