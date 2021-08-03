@@ -1,0 +1,46 @@
+{% macro message_part() %}
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            <div class="ui {{ messages[0][0] }} message">
+                <i class="close icon"></i>
+                <div class="header">
+                </div>
+                {{ messages[0][1] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+{% endmacro %}
+
+{% macro pagination_widget(pagination, endpoint) %}
+    <div style="text-align: center;">
+        <div class="ui buttons">
+            {% if pagination.has_prev %}
+                <a class="ui orange left icon button"
+                   href="{{ url_for(endpoint, page=pagination.prev_num, **kwargs) }}">
+                    <i class="angle double left icon"></i>上一页
+                </a>
+            {% else %}
+                <div class="ui disabled orange button">上一页不可用</div>
+            {% endif %}
+            {% for p in pagination.iter_pages() %}
+                {% if p %}
+                    {% if p == pagination.page %}
+                        <div class="ui black button">{{ p }}</div>
+                    {% else %}
+                        <a class="ui blue button" href="{{ url_for(endpoint, page=p, **kwargs) }}">{{ p }}</a>
+                    {% endif %}
+                {% else %}
+                    <div class="ui blue basic button">…</div>
+                {% endif %}
+            {% endfor %}
+            {% if pagination.has_next %}
+                <a class="ui green right icon button"
+                   href="{{ url_for(endpoint, page=pagination.next_num, **kwargs) }}">
+                    下一页<i class="angle double right icon"></i>
+                </a>
+            {% else %}
+                <div class="ui disabled green button">下一页不可用</div>
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}
