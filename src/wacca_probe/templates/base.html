@@ -49,6 +49,7 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E170V9QX4M"></script>
 <script defer src='https://hm.baidu.com/hm.js?fa663a4c914007f9c4664ea57bbd8698'></script>
+<script src="https://cdn-go.cn/aegis/aegis-sdk/latest/aegis.min.js"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
 
@@ -60,6 +61,13 @@
 
     gtag('config', 'G-E170V9QX4M');
     var _hmt = _hmt || [];
+    const aegis = new Aegis({
+        id: 'p0dDnsk3jYbYXZrWKe', // 上报 id
+        uin: 'Anonymous', // 用户唯一 ID（可选）
+        reportApiSpeed: true, // 接口测速
+        reportAssetSpeed: true, // 静态资源测速
+        spa: true // spa 应用页面跳转的时候开启 pv 计算
+      });
 </script>
 </body>
 </html>
