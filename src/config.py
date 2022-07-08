@@ -16,8 +16,11 @@ class BaseConfig:
     def init_app(app):
         pass
 
+    SECRET_KEY = os.getenv('SECRET_KEY', 'wacca_probe')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = 'wacca_probe'
+    SQLALCHEMY_BINDS = {
+        'wacca': os.getenv('SQLALCHEMY_BINDS_WACCA', None)
+    }
 
 
 class DevelopmentConfig(BaseConfig):

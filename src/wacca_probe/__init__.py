@@ -30,7 +30,7 @@ class ReverseProxied(object):
 
 def create_app(config_name=None):
     if config_name is None:
-        config_name = os.getenv('FLASK_ENV', 'production')
+        config_name = os.getenv('FLASK_ENV', 'default')
 
     app = flask.Flask(__name__, static_url_path='')
     app.wsgi_app = ReverseProxied(app.wsgi_app)
