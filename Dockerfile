@@ -1,20 +1,36 @@
-FROM python:3.10.5-bullseye
-
-LABEL maintainer="yuangezhizao <root@yuangezhizao.cn>"
+FROM python:3.10.5-slim-bullseye AS build-venv
 
 WORKDIR /app
 
+COPY requirements.txt .
+
+#RUN python3.10 -m venv venv && \
+#    venv/bin/pip3.10 install -i https://mirrors.cloud.tencent.com/pypi/simple --upgrade pip setuptools wheel && \
+#    venv/bin/pip3.10 config set global.index-url https://mirrors.cloud.tencent.com/pypi/simple && \
+#    venv/bin/pip3.10 install --disable-pip-version-check --no-cache-dir gunicorn[gevent] && \
+#    venv/bin/pip3.10 install --disable-pip-version-check --no-cache-dir -r requirements.txt
+RUN pip3.10 install -i https://mirrors.cloud.tencent.com/pypi/simple --upgrade pip setuptools wheel && \
+    pip3.10 config set global.index-url https://mirrors.cloud.tencent.com/pypi/simple &&  \
+    pip3.10 install --disable-pip-version-check --no-warn-script-location --no-cache-dir --user gunicorn[gevent] &&  \
+    pip3.10 install --disable-pip-version-check --no-warn-script-location --no-cache-dir --user -r requirements.txt
+
+#FROM gcr.io/distroless/python3-debian11:debug
+#FROM python:3.10.5-alpine
+FROM python:3.10.5-slim-bullseye
+
+LABEL maintainer="yuangezhizao <root@yuangezhizao.cn>"
+
+#COPY --from=build-venv /app/venv /app/venv
+COPY --from=build-venv /root/.local /root/.local
+
+WORKDIR /app
+
+COPY . /app
+
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-
-COPY requirements.txt ./
-
-RUN pip3.10 install -i https://mirrors.cloud.tencent.com/pypi/simple --upgrade pip setuptools wheel && \
-    pip3.10 config set global.index-url https://mirrors.cloud.tencent.com/pypi/simple && \
-    pip3.10 install --disable-pip-version-check --no-cache-dir gunicorn[gevent] && \
-    pip3.10 install --disable-pip-version-check --no-cache-dir -r requirements.txt
-
-COPY . .
+#ENV PATH=/app/venv/bin:$PATH
+ENV PATH=/root/.local/bin:$PATH
 
 EXPOSE 5000
 
