@@ -21,6 +21,7 @@ class BaseConfig:
     SQLALCHEMY_BINDS = {
         'wacca': os.getenv('SQLALCHEMY_BINDS_WACCA', None)
     }
+    CACHE_TYPE = 'SimpleCache'
 
 
 class DevelopmentConfig(BaseConfig):
