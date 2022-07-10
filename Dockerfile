@@ -5,12 +5,10 @@ WORKDIR /app
 COPY requirements.txt .
 
 #RUN python3.10 -m venv venv && \
-#    venv/bin/pip3.10 install -i https://mirrors.cloud.tencent.com/pypi/simple --upgrade pip setuptools wheel && \
-#    venv/bin/pip3.10 config set global.index-url https://mirrors.cloud.tencent.com/pypi/simple && \
+#    venv/bin/pip3.10 install --upgrade pip setuptools wheel && \
 #    venv/bin/pip3.10 install --disable-pip-version-check --no-cache-dir gunicorn[gevent] && \
 #    venv/bin/pip3.10 install --disable-pip-version-check --no-cache-dir -r requirements.txt
-RUN pip3.10 install -i https://mirrors.cloud.tencent.com/pypi/simple --upgrade pip setuptools wheel && \
-    pip3.10 config set global.index-url https://mirrors.cloud.tencent.com/pypi/simple &&  \
+RUN pip3.10 install --upgrade pip setuptools wheel && \
     pip3.10 install --disable-pip-version-check --no-warn-script-location --no-cache-dir --user gunicorn[gevent] &&  \
     pip3.10 install --disable-pip-version-check --no-warn-script-location --no-cache-dir --user -r requirements.txt
 
