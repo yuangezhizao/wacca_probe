@@ -10,8 +10,11 @@ import os
 import time
 
 import flask
+from flask_caching import Cache
 
 from config import config
+
+cache = Cache()
 
 
 class ReverseProxied(object):
@@ -52,6 +55,10 @@ def register_extensions(app):
 
     db.init_app(app)
     compress.init_app(app)
+
+    cache.init_app(app)
+    with app.app_context():
+        cache.clear()
 
 
 def register_blueprints(app):

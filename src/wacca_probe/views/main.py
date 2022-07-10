@@ -8,6 +8,7 @@
 """
 import flask
 
+from wacca_probe import cache
 from wacca_probe.models.wacca import Record
 
 app = flask.current_app
@@ -15,11 +16,13 @@ bp = flask.Blueprint('main', __name__)
 
 
 @bp.route('/')
+@cache.cached()
 def site_index():
     return flask.render_template('index.html')
 
 
 @bp.route('/record')
+@cache.cached()
 def record():
     page = int(flask.request.args.get('page', 1))
     per_page = int(flask.request.args.get('per_page', 20))
