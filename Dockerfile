@@ -1,20 +1,20 @@
-FROM python:3.11-slim-bullseye AS build-venv
+FROM python:3.13-slim-bullseye AS build-venv
 
 WORKDIR /app
 
 COPY requirements.txt .
 
-#RUN python3.11 -m venv venv && \
-#    venv/bin/pip3.11 install --upgrade pip setuptools wheel && \
-#    venv/bin/pip3.11 install --disable-pip-version-check --no-cache-dir gunicorn[gevent] && \
-#    venv/bin/pip3.11 install --disable-pip-version-check --no-cache-dir -r requirements.txt
-RUN pip3.11 install --upgrade pip setuptools wheel && \
-    pip3.11 install --disable-pip-version-check --no-warn-script-location --no-cache-dir --user gunicorn[gevent] &&  \
-    pip3.11 install --disable-pip-version-check --no-warn-script-location --no-cache-dir --user -r requirements.txt
+#RUN python3.13 -m venv venv && \
+#    venv/bin/pip3.13 install --upgrade pip setuptools wheel && \
+#    venv/bin/pip3.13 install --disable-pip-version-check --no-cache-dir gunicorn[gevent] && \
+#    venv/bin/pip3.13 install --disable-pip-version-check --no-cache-dir -r requirements.txt
+RUN pip3.13 install --upgrade pip setuptools wheel && \
+    pip3.13 install --disable-pip-version-check --no-warn-script-location --no-cache-dir --user gunicorn[gevent] &&  \
+    pip3.13 install --disable-pip-version-check --no-warn-script-location --no-cache-dir --user -r requirements.txt
 
-#FROM gcr.io/distroless/python3-debian11:debug
-#FROM python:3.11-alpine
-FROM python:3.11-slim-bullseye
+#FROM gcr.io/distroless/python3-debian12:debug
+#FROM python:3.13-alpine
+FROM python:3.13-slim-bullseye
 
 LABEL maintainer="yuangezhizao <root@yuangezhizao.cn>"
 
